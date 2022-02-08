@@ -14,12 +14,12 @@ const double kPaddingDefault = 10.0;
 const double kPaddingLarge = 15.0;
 const double kPaddingExtraLarge = 15.0;
 //Font size
-double kFontSizeExtraSmall = Get.context!.width >= 1300 ? 14 : 10;
-double kFontSizeSmall = Get.context!.width >= 1300 ? 16 : 12;
-double kFontSizeDefault = Get.context!.width >= 1300 ? 18 : 14;
-double kFontSizeLarge = Get.context!.width >= 1300 ? 20 : 16;
-double kFontSizeExtraLarge = Get.context!.width >= 1300 ? 22 : 18;
-double kFontSizeOverLarge = Get.context!.width >= 1300 ? 28 : 24;
+double kFontSizeExtraSmall = Get.context!.width >= 1366 ? 14 : 10;
+double kFontSizeSmall = Get.context!.width >= 1366 ? 16 : 12;
+double kFontSizeDefault = Get.context!.width >= 1366 ? 18 : 14;
+double kFontSizeLarge = Get.context!.width >= 1366 ? 20 : 16;
+double kFontSizeExtraLarge = Get.context!.width >= 1366 ? 22 : 18;
+double kFontSizeOverLarge = Get.context!.width >= 1366 ? 28 : 24;
 
 const double radiusSmall = 5.0;
 const double radiusDefault = 10.0;
