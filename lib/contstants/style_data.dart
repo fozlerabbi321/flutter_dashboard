@@ -7,6 +7,7 @@ import 'size_config.dart';
 
 //app main them
 const kBrightnessTheme = Brightness.light;
+double appBarHeight = AppBar().preferredSize.height;
 //Space margin or padding
 const double kPaddingExtraSmall = 5.0;
 const double kPaddingSmall = 10.0;

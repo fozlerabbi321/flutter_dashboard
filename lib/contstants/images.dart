@@ -1,4 +1,3 @@
-
 import 'strings.dart';
 
 class Images {
@@ -16,6 +15,7 @@ class Images {
   static const String tracking = kImageDir + 'tracking.png';
   static const String cashOnDelivery = kImageDir + 'tracking.png';
   static const String digitalPayment = kImageDir + 'tracking.png';
+  static const String testUser = kImageDir + 'test_user.jpg';
 
   ///Icon
   static const String trams = kIConDir + 'trams.svg';

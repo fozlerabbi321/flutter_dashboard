@@ -1,6 +1,5 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dashboard/view/screen/dashboard_screen.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -10,6 +9,7 @@ import 'contstants/theme/dark_theme.dart';
 import 'contstants/theme/light_theme.dart';
 import 'services/get_di.dart';
 import 'services/localization_services.dart';
+import 'view/screens/dashboard_screen.dart';
 
 late SharedPreferences prefs;
 late SharedPreferences intro;
