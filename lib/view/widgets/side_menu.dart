@@ -1,22 +1,89 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dashboard/controllers/dashboard_controller.dart';
 import 'package:flutter_dashboard/contstants/colors_data.dart';
+import 'package:flutter_dashboard/contstants/images.dart';
 import 'package:flutter_dashboard/contstants/size_config.dart';
+import 'package:get/get.dart';
 
 import '../../contstants/style_data.dart';
+import '../screens/dashboard/widgets/side_menu_expand_card.dart';
+import 'app_bar_logo.dart';
+import 'text_image_widget.dart';
 
 class SideMenu extends StatelessWidget {
-  const SideMenu({
-    Key? key,
-  }) : super(key: key);
+  final double width;
+  final DashboardController dashboardController;
+
+  const SideMenu(
+      {Key? key, this.width = 200, required this.dashboardController})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: appBarHeight),
+      color: Theme.of(context).backgroundColor,
+      margin: EdgeInsets.only(top: SizeConfig.isDesktop() ? 0 : appBarHeight),
       height: SizeConfig.screenHeight,
       child: SafeArea(
-        child: Container(
-          color: kPrimaryColor,
+        child: Column(
+          children: [
+            if (SizeConfig.isMobile()) kHeightBox10,
+            if (SizeConfig.isMobile())
+              const AppBarLogo(
+                isMenuClick: true,
+              ),
+            if (SizeConfig.isMobile()) kHeightBox10,
+            Row(
+              children: [
+                Container(
+                  color: const Color(0xFFAF126E),
+                  width: 3,
+                  height: 50,
+                ),
+                Container(
+                  height: 50,
+                  width: width - 3.0,
+                  padding:
+                      EdgeInsets.only(left: SizeConfig.isDesktop() ? 15 : 10),
+                  decoration: BoxDecoration(
+                    color: const Color(0xFFe9f7f0),
+                    boxShadow: [
+                      kOrdinaryShadow,
+                    ],
+                  ),
+                  child: TextImageWidgets(
+                    title: 'Dashboard'.tr,
+                    image: Images.help,
+                    color: const Color(0xFFAF126E),
+                    isSelect: true,
+                    space: SizeConfig.isDesktop() ? 15 : 10,
+                  ),
+                ),
+              ],
+            ),
+            kHeightBox5,
+            SideMenuExpandCard(
+              title: 'Supplier'.tr,
+              image: dashboardController.isExpand
+                  ? Images.dropDown
+                  : Images.rightArrow,
+              isSelect: dashboardController.isExpand,
+              onTap: () {
+                dashboardController.updateIsExpand();
+              },
+            ),
+            kHeightBox5,
+            SideMenuExpandCard(
+              title: 'Product'.tr,
+              image: dashboardController.isExpand2
+                  ? Images.dropDown
+                  : Images.rightArrow,
+              isSelect: dashboardController.isExpand2,
+              onTap: () {
+                dashboardController.updateIsExpand2();
+              },
+            )
+          ],
         ),
       ),
     );

@@ -1,24 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dashboard/contstants/size_config.dart';
 import 'package:flutter_dashboard/contstants/style_data.dart';
+import 'package:flutter_dashboard/models/response/rp_dash_board_list.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../contstants/colors_data.dart';
 
 class DashboardTopCard extends StatelessWidget {
-  final String icon;
-  final String title;
-  final String subTitle;
-  final Color startColors;
-  final Color endColors;
+  final RpDashboardTopList data;
 
   const DashboardTopCard({
     Key? key,
-    required this.title,
-    required this.subTitle,
-    required this.icon,
-    required this.startColors,
-    required this.endColors,
+    required this.data,
   }) : super(key: key);
 
   @override
@@ -29,11 +22,11 @@ class DashboardTopCard extends StatelessWidget {
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            startColors,
-            endColors,
+            data.startColors,
+            data.endColors,
           ],
-          begin: Alignment.centerRight,
-          end: Alignment.centerLeft,
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
         ),
         borderRadius: const BorderRadius.all(
           Radius.circular(
@@ -68,7 +61,7 @@ class DashboardTopCard extends StatelessWidget {
                     width: 25,
                     height: 25,
                     child: SvgPicture.asset(
-                      icon,
+                      data.icon,
                       color: kPrimaryColor,
                     ),
                   ),
@@ -79,14 +72,14 @@ class DashboardTopCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    title,
+                    data.total,
                     style: Theme.of(context).textTheme.subtitle1?.copyWith(
                           fontSize: SizeConfig.isDesktop() ? 25 : 16,
                           color: kWhiteColor,
                         ),
                   ),
                   Text(
-                    subTitle,
+                    data.subTitle,
                     style: Theme.of(context).textTheme.subtitle2?.copyWith(
                           color: kWhiteColor,
                           fontSize: SizeConfig.isDesktop() ? 14 : 12,

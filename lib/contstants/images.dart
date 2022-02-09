@@ -25,4 +25,7 @@ class Images {
   static const String help = kIConDir + 'help.svg';
   static const String location = kIConDir + 'location.svg';
   static const String account = kIConDir + 'account.svg';
+  static const String dropDown = kIConDir + 'drop_down.svg';
+  static const String dropTop = kIConDir + 'drop_top.svg';
+  static const String rightArrow = kIConDir + 'right_arrow.svg';
 }
