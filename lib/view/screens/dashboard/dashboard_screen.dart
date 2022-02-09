@@ -4,8 +4,10 @@ import 'package:flutter_dashboard/contstants/colors_data.dart';
 import 'package:flutter_dashboard/contstants/images.dart';
 import 'package:flutter_dashboard/contstants/size_config.dart';
 import 'package:flutter_dashboard/contstants/style_data.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
+import '../../widgets/dash_board_top_grid_card.dart';
 import '../../widgets/dashboard_appbar_acount.dart';
 import '../../widgets/side_menu.dart';
 import '../../widgets/text_image_widget.dart';
@@ -67,7 +69,32 @@ class _DashboardScreenState extends State<DashboardScreen> {
         builder: (dashBoardController) {
           return SafeArea(
             child: Stack(
+              clipBehavior: Clip.none,
               children: [
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: SizeConfig.isMobile() ? 10 : 20),
+                  child: MasonryGridView.count(
+                    crossAxisCount: SizeConfig.isMobile() ? 1 : 4,
+                    mainAxisSpacing: SizeConfig.isMobile() ? 20 : 20,
+                    crossAxisSpacing: SizeConfig.isMobile() ? 20 : 20,
+                    itemCount: 12,
+                    physics: const ScrollPhysics(),
+                    padding: EdgeInsets.zero,
+                    itemBuilder: (BuildContext context, int index) {
+                      return InkWell(
+                        onTap: () {},
+                        child: DashboardTopCard(
+                          icon: Images.about,
+                          title: '5000',
+                          subTitle: 'Customer'.tr,
+                          startColors: kPrimaryColor,
+                          endColors: kSecondaryColor,
+                        ),
+                      );
+                    },
+                  ),
+                ),
                 Container(
                   child: dashBoardController.isAccountPopup
                       ? Positioned(
@@ -185,6 +212,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                               : const SizedBox(),
                         ),
                 ),
+
                 /* Container(
                   child: dashBoardController.isMenuPopup
                       ? Positioned(
