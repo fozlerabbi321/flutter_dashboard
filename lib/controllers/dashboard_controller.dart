@@ -10,6 +10,13 @@ class DashboardController extends GetxController {
   });
 
   final RpDashboardTopList _topList = RpDashboardTopList();
+  List serviceList = [
+    'Customer Receipt'.tr,
+    'Supplier Payment'.tr,
+    'Today\'s Summery'.tr,
+    'Return Order'.tr,
+    'POS'.tr
+  ];
   bool _isAccountPopup = false;
   bool _isMenu = true;
   bool _isMenuPopup = false;

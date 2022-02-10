@@ -13,6 +13,7 @@ import '../../widgets/dash_board_top_grid_card.dart';
 import '../../widgets/dashboard_appbar_acount.dart';
 import '../../widgets/side_menu.dart';
 import '../../widgets/text_image_widget.dart';
+import 'widgets/app_bar_services.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -67,7 +68,15 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 ],
               ),
               Expanded(
-                child: Container(),
+                child: Stack(
+                  children: [
+                    Center(
+                      child: AppBarServices(
+                        dashboardController: dashBoardController,
+                      ),
+                    ),
+                  ],
+                ),
               ),
               InkWell(
                   onTap: () {
@@ -206,13 +215,13 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     children: [
                                       TextImageWidgets(
                                         image: Images.account,
-                                        title: 'Customer Recive'.tr,
+                                        title: 'Customer Receipt'.tr,
                                         isSelect: true,
                                       ),
                                       kHeightBox25,
                                       TextImageWidgets(
                                         image: Images.account,
-                                        title: 'Supplier payment'.tr,
+                                        title: 'Supplier Payment'.tr,
                                         isSelect: true,
                                       ),
                                       kHeightBox25,
