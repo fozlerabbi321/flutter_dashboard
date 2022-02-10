@@ -18,6 +18,7 @@ class Images {
   static const String testUser = kImageDir + 'test_user.jpg';
 
   ///Icon
+  static const String home = kIConDir + 'home.svg';
   static const String trams = kIConDir + 'trams.svg';
   static const String policy = kIConDir + 'policy.svg';
   static const String about = kIConDir + 'about_us.svg';

@@ -11,7 +11,7 @@ class DashboardController extends GetxController {
 
   final RpDashboardTopList _topList = RpDashboardTopList();
   bool _isAccountPopup = false;
-  bool _isMenu = false;
+  bool _isMenu = true;
   bool _isMenuPopup = false;
   bool _isExpand = false;
   bool _isExpand2 = false;

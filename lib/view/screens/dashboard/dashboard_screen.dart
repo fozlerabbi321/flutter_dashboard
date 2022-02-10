@@ -34,16 +34,22 @@ class _DashboardScreenState extends State<DashboardScreen> {
           constraints: const BoxConstraints(maxWidth: 200),
           child: SideMenu(
             dashboardController: dashBoardController,
+            width: 200,
           ),
         ),
+        drawerEnableOpenDragGesture: false,
         appBar: AppBar(
+          leadingWidth: 0,
+          leading: Container(),
           title: Row(
             children: [
               Row(
                 children: [
-                  if (dashBoardController.isMenu)
+                  if (SizeConfig.isDesktop())
                     AppBarLogo(
-                      isMenuClick: dashBoardController.isMenu,
+                      isMenuClick: SizeConfig.isMobile()
+                          ? false
+                          : dashBoardController.isMenu,
                     ),
                   IconButton(
                     icon: const Icon(
@@ -51,7 +57,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                       color: kPrimaryColor,
                     ),
                     onPressed: () {
-                      if (SizeConfig.isMobile()) {
+                      if (!SizeConfig.isDesktop()) {
                         _scaffoldKey.currentState?.openDrawer();
                       } else {
                         dashBoardController.updateMenu();
@@ -92,6 +98,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   SizeConfig.isDesktop()
                       ? SideMenu(
                           dashboardController: dashBoardController,
+                          width: dashBoardController.isMenu ? 200 : null,
                         )
                       : const SizedBox(),
                   Expanded(
