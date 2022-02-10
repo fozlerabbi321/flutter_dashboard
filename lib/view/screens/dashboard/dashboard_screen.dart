@@ -5,6 +5,7 @@ import 'package:flutter_dashboard/contstants/images.dart';
 import 'package:flutter_dashboard/contstants/size_config.dart';
 import 'package:flutter_dashboard/contstants/style_data.dart';
 import 'package:flutter_dashboard/models/response/rp_dash_board_list.dart';
+import 'package:flutter_dashboard/view/screens/dashboard/widgets/app_bar_acctions.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
@@ -70,11 +71,50 @@ class _DashboardScreenState extends State<DashboardScreen> {
               Expanded(
                 child: Stack(
                   children: [
-                    Center(
-                      child: AppBarServices(
+                    if (SizeConfig.isDesktop())
+                      Center(
+                        child: AppBarServices(
+                          dashboardController: dashBoardController,
+                        ),
+                      ),
+                    if (!SizeConfig.isMobile())
+                      AppBarActions(
                         dashboardController: dashBoardController,
                       ),
-                    ),
+                    if (SizeConfig.isMobile())
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 5,
+                          horizontal: 10,
+                        ),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: kPrimaryColor,
+                          ),
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        height: 38,
+                        child: Row(
+                          children: [
+                            SizedBox(
+                              width: 20,
+                              child: Icon(
+                                Icons.search_outlined,
+                                color:
+                                    Get.isDarkMode ? kWhiteColor : kHintColor,
+                              ),
+                            ),
+                            kWidthBox15,
+                            Text(
+                              'Search...'.tr,
+                              style: kRegularText2.copyWith(
+                                color: kOrdinaryColor,
+                              ),
+                            ),
+                            const Spacer(),
+                          ],
+                        ),
+                      ),
                   ],
                 ),
               ),
@@ -249,67 +289,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             : const SizedBox(),
                       ),
               ),
-              /* Container(
-                  child: dashBoardController.isMenuPopup
-                      ? Positioned(
-                          top: 0,
-                          right: 0,
-                          child: AnimatedContainer(
-                            decoration: BoxDecoration(
-                              color: Theme.of(context).cardColor,
-                              boxShadow: [
-                                kOrdinaryShadow,
-                              ],
-                              borderRadius: const BorderRadius.only(
-                                bottomLeft: Radius.circular(
-                                  2,
-                                ),
-                                bottomRight: Radius.circular(
-                                  2,
-                                ),
-                              ),
-                            ),
-                            padding: const EdgeInsets.all(15),
-                            duration: const Duration(milliseconds: 5000),
-                            curve: Curves.bounceInOut,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                TextImageWidgets(
-                                  image: Images.account,
-                                  title: 'Customer Recive'.tr,
-                                  isSelect: true,
-                                ),
-                                kHeightBox25,
-                                TextImageWidgets(
-                                  image: Images.account,
-                                  title: 'Supplier payment'.tr,
-                                  isSelect: true,
-                                ),
-                                kHeightBox25,
-                                TextImageWidgets(
-                                  image: Images.account,
-                                  title: 'Today\'s Summery'.tr,
-                                  isSelect: true,
-                                ),
-                                kHeightBox25,
-                                TextImageWidgets(
-                                  image: Images.account,
-                                  title: 'Return Order'.tr,
-                                  isSelect: true,
-                                ),
-                                kHeightBox25,
-                                TextImageWidgets(
-                                  image: Images.account,
-                                  title: 'POS'.tr,
-                                  isSelect: true,
-                                ),
-                              ],
-                            ),
-                          ),
-                        )
-                      : const SizedBox(),
-                ),*/
             ],
           ),
         ),

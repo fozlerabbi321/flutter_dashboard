@@ -29,4 +29,6 @@ class Images {
   static const String dropDown = kIConDir + 'drop_down.svg';
   static const String dropTop = kIConDir + 'drop_top.svg';
   static const String rightArrow = kIConDir + 'right_arrow.svg';
+  static const String cart = kIConDir + 'cart.svg';
+  static const String notification = kIConDir + 'notification.svg';
 }

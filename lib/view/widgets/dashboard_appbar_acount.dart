@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dashboard/contstants/colors_data.dart';
+import 'package:flutter_dashboard/contstants/size_config.dart';
 import 'package:get/get.dart';
 
 import '../../contstants/images.dart';
@@ -12,6 +13,7 @@ class DashBoardAppBarAccount extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: [
+        if (!SizeConfig.isDesktop()) kWidthBox10,
         SizedBox(
           child: Container(
             alignment: Alignment.centerLeft,
@@ -30,20 +32,21 @@ class DashBoardAppBarAccount extends StatelessWidget {
             ),
           ),
         ),
-        kWidthBox10,
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              'Fozle Rabbi',
-              style: Theme.of(context).textTheme.subtitle1,
-            ),
-            Text(
-              'Admin',
-              style: Theme.of(context).textTheme.bodyText1,
-            ),
-          ],
-        ),
+        if (SizeConfig.isDesktop()) kWidthBox10,
+        if (SizeConfig.isDesktop())
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                'Fozle Rabbi',
+                style: Theme.of(context).textTheme.subtitle1,
+              ),
+              Text(
+                'Admin',
+                style: Theme.of(context).textTheme.bodyText1,
+              ),
+            ],
+          ),
       ],
     );
     /*return PopupMenuButton(
