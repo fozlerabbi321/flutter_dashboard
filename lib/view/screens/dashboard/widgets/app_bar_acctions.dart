@@ -28,7 +28,7 @@ class AppBarActions extends StatelessWidget {
                   height: 1.0,
                 ),
           ),
-          LanguagePopup(),
+          const LanguagePopup(),
           kWidthBox5,
           SizedBox(
             width: 20,

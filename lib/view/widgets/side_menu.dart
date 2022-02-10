@@ -26,112 +26,114 @@ class SideMenu extends StatelessWidget {
       margin: EdgeInsets.only(top: SizeConfig.isDesktop() ? 0 : appBarHeight),
       height: SizeConfig.screenHeight,
       child: SafeArea(
-        child: dashboardController.isMenu == false
-            ? Column(
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        color: const Color(0xFFAF126E),
-                        width: 3,
-                        height: 50,
-                      ),
-                      Container(
-                        height: 50,
-                        //width: width - 3.0,
-                        padding: EdgeInsets.only(
-                            left: SizeConfig.isDesktop() ? 15 : 10,
-                            right: SizeConfig.isDesktop() ? 15 : 10),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFe9f7f0),
-                          boxShadow: [
-                            kOrdinaryShadow,
-                          ],
+        child: SingleChildScrollView(
+          child: dashboardController.isMenu == false
+              ? Column(
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          color: const Color(0xFFAF126E),
+                          width: 3,
+                          height: 50,
                         ),
-                        child: SizedBox(
-                          width: 15,
-                          height: 15,
-                          child: SvgPicture.asset(
-                            Images.home,
-                            color: const Color(0xFFAF126E),
+                        Container(
+                          height: 50,
+                          //width: width - 3.0,
+                          padding: EdgeInsets.only(
+                              left: SizeConfig.isDesktop() ? 15 : 10,
+                              right: SizeConfig.isDesktop() ? 15 : 10),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFe9f7f0),
+                            boxShadow: [
+                              kOrdinaryShadow,
+                            ],
+                          ),
+                          child: SizedBox(
                             width: 15,
                             height: 15,
+                            child: SvgPicture.asset(
+                              Images.home,
+                              color: const Color(0xFFAF126E),
+                              width: 15,
+                              height: 15,
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  ),
-                  SideMenuCollapsed(
-                    title: 'Supplier'.tr,
-                    image: Images.trams,
-                  ),
-                  SideMenuCollapsed(
-                    title: 'Product'.tr,
-                    image: Images.location,
-                  ),
-                ],
-              )
-            : Column(
-                children: [
-                  if (SizeConfig.isMobile()) kHeightBox10,
-                  if (SizeConfig.isMobile())
-                    const AppBarLogo(
-                      isMenuClick: true,
+                      ],
                     ),
-                  if (SizeConfig.isMobile()) kHeightBox10,
-                  Row(
-                    children: [
-                      Container(
-                        color: const Color(0xFFAF126E),
-                        width: 3,
-                        height: 50,
+                    SideMenuCollapsed(
+                      title: 'Supplier'.tr,
+                      image: Images.trams,
+                    ),
+                    SideMenuCollapsed(
+                      title: 'Product'.tr,
+                      image: Images.location,
+                    ),
+                  ],
+                )
+              : Column(
+                  children: [
+                    if (SizeConfig.isMobile()) kHeightBox10,
+                    if (SizeConfig.isMobile())
+                      const AppBarLogo(
+                        isMenuClick: true,
                       ),
-                      Container(
-                        height: 50,
-                        width: width! - 3.0,
-                        padding: EdgeInsets.only(
-                          left: SizeConfig.isDesktop() ? 15 : 10,
-                        ),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFe9f7f0),
-                          boxShadow: [
-                            kOrdinaryShadow,
-                          ],
-                        ),
-                        child: TextImageWidgets(
-                          title: 'Dashboard'.tr,
-                          image: Images.home,
+                    if (SizeConfig.isMobile()) kHeightBox10,
+                    Row(
+                      children: [
+                        Container(
                           color: const Color(0xFFAF126E),
-                          isSelect: true,
-                          space: SizeConfig.isDesktop() ? 15 : 10,
+                          width: 3,
+                          height: 50,
                         ),
-                      ),
-                    ],
-                  ),
-                  kHeightBox5,
-                  SideMenuExpandCard(
-                    title: 'Supplier'.tr,
-                    image: dashboardController.isExpand
-                        ? Images.dropDown
-                        : Images.rightArrow,
-                    isSelect: dashboardController.isExpand,
-                    onTap: () {
-                      dashboardController.updateIsExpand();
-                    },
-                  ),
-                  kHeightBox5,
-                  SideMenuExpandCard(
-                    title: 'Product'.tr,
-                    image: dashboardController.isExpand2
-                        ? Images.dropDown
-                        : Images.rightArrow,
-                    isSelect: dashboardController.isExpand2,
-                    onTap: () {
-                      dashboardController.updateIsExpand2();
-                    },
-                  )
-                ],
-              ),
+                        Container(
+                          height: 50,
+                          width: width! - 3.0,
+                          padding: EdgeInsets.only(
+                            left: SizeConfig.isDesktop() ? 15 : 10,
+                          ),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFe9f7f0),
+                            boxShadow: [
+                              kOrdinaryShadow,
+                            ],
+                          ),
+                          child: TextImageWidgets(
+                            title: 'Dashboard'.tr,
+                            image: Images.home,
+                            color: const Color(0xFFAF126E),
+                            isSelect: true,
+                            space: SizeConfig.isDesktop() ? 15 : 10,
+                          ),
+                        ),
+                      ],
+                    ),
+                    kHeightBox5,
+                    SideMenuExpandCard(
+                      title: 'Supplier'.tr,
+                      image: dashboardController.isExpand
+                          ? Images.dropDown
+                          : Images.rightArrow,
+                      isSelect: dashboardController.isExpand,
+                      onTap: () {
+                        dashboardController.updateIsExpand();
+                      },
+                    ),
+                    kHeightBox5,
+                    SideMenuExpandCard(
+                      title: 'Product'.tr,
+                      image: dashboardController.isExpand2
+                          ? Images.dropDown
+                          : Images.rightArrow,
+                      isSelect: dashboardController.isExpand2,
+                      onTap: () {
+                        dashboardController.updateIsExpand2();
+                      },
+                    )
+                  ],
+                ),
+        ),
       ),
     );
   }
