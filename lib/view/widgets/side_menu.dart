@@ -7,6 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../contstants/style_data.dart';
+import '../screens/dashboard/widgets/side_menu_collapsed.dart';
 import '../screens/dashboard/widgets/side_menu_expand_card.dart';
 import 'app_bar_logo.dart';
 import 'text_image_widget.dart';
@@ -59,6 +60,14 @@ class SideMenu extends StatelessWidget {
                         ),
                       ),
                     ],
+                  ),
+                  SideMenuCollapsed(
+                    title: 'Supplier'.tr,
+                    image: Images.trams,
+                  ),
+                  SideMenuCollapsed(
+                    title: 'Product'.tr,
+                    image: Images.location,
                   ),
                 ],
               )
