@@ -10,6 +10,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
 import '../../widgets/app_bar_logo.dart';
+import '../../widgets/dash_board_progress_grid_card.dart';
 import '../../widgets/dash_board_top_grid_card.dart';
 import '../../widgets/dashboard_appbar_acount.dart';
 import '../../widgets/side_menu.dart';
@@ -23,8 +24,31 @@ class DashboardScreen extends StatefulWidget {
   _DashboardScreenState createState() => _DashboardScreenState();
 }
 
-class _DashboardScreenState extends State<DashboardScreen> {
+class _DashboardScreenState extends State<DashboardScreen>
+    with SingleTickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+  AnimationController? controller;
+  Animation<double>? animation;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = AnimationController(
+        duration: const Duration(milliseconds: 2000), vsync: this);
+    animation = Tween(begin: 0.0, end: 1.0).animate(controller!)
+      ..addListener(() {
+        setState(() {
+          // the state that has changed here is the animation object’s value
+        });
+      });
+    controller?.repeat();
+  }
+
+  @override
+  void dispose() {
+    controller?.stop();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -151,23 +175,58 @@ class _DashboardScreenState extends State<DashboardScreen> {
                         )
                       : const SizedBox(),
                   Expanded(
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: SizeConfig.isMobile() ? 10 : 20),
-                      child: MasonryGridView.count(
-                        crossAxisCount: SizeConfig.isMobile() ? 1 : 4,
-                        mainAxisSpacing: SizeConfig.isMobile() ? 20 : 20,
-                        crossAxisSpacing: SizeConfig.isMobile() ? 20 : 20,
-                        itemCount: rpTopList.length,
-                        physics: const ScrollPhysics(),
-                        shrinkWrap: true,
-                        padding: EdgeInsets.zero,
-                        itemBuilder: (BuildContext context, int index) {
-                          return InkWell(
-                            onTap: () {},
-                            child: DashboardTopCard(data: rpTopList[index]),
-                          );
-                        },
+                    child: SingleChildScrollView(
+                      child: Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: SizeConfig.isMobile() ? 10 : 20,
+                            vertical: 15),
+                        child: Column(
+                          children: [
+                            MasonryGridView.count(
+                              crossAxisCount: SizeConfig.isMobile()
+                                  ? SizeConfig.screenWidth > 600
+                                      ? 2
+                                      : 1 // size < 600 or || size < 768
+                                  : 4,
+                              mainAxisSpacing: SizeConfig.isMobile() ? 20 : 20,
+                              crossAxisSpacing: SizeConfig.isMobile() ? 20 : 20,
+                              itemCount: rpTopList.length,
+                              physics: const ScrollPhysics(),
+                              shrinkWrap: true,
+                              padding: EdgeInsets.zero,
+                              itemBuilder: (BuildContext context, int index) {
+                                return InkWell(
+                                  onTap: () {},
+                                  child:
+                                      DashboardTopCard(data: rpTopList[index]),
+                                );
+                              },
+                            ),
+                            kHeightBox15,
+                            MasonryGridView.count(
+                              crossAxisCount: SizeConfig.isMobile()
+                                  ? SizeConfig.screenWidth > 600
+                                      ? 2
+                                      : 1 // size < 600 or || size < 768
+                                  : 4,
+                              mainAxisSpacing: SizeConfig.isMobile() ? 20 : 20,
+                              crossAxisSpacing: SizeConfig.isMobile() ? 20 : 20,
+                              itemCount: rpTopList.length,
+                              physics: const ScrollPhysics(),
+                              shrinkWrap: true,
+                              padding: EdgeInsets.zero,
+                              itemBuilder: (BuildContext context, int index) {
+                                return InkWell(
+                                  onTap: () {},
+                                  child: DashboardProgressCard(
+                                    data: rpTopList[index],
+                                    progress: 0.6 + index.toDouble() / 100,
+                                  ),
+                                );
+                              },
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   ),

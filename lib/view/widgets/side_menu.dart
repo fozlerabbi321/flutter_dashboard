@@ -74,7 +74,6 @@ class SideMenu extends StatelessWidget {
                 )
               : Column(
                   children: [
-                    if (SizeConfig.isMobile()) kHeightBox10,
                     if (SizeConfig.isMobile())
                       const AppBarLogo(
                         isMenuClick: true,

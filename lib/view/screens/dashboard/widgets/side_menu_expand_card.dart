@@ -100,6 +100,7 @@ class SideMenuExpandCard extends StatelessWidget {
                               itemCount: 5,
                               shrinkWrap: true,
                               padding: EdgeInsets.zero,
+                              physics: const NeverScrollableScrollPhysics(),
                               itemBuilder: (context, index) {
                                 return SideMenuSubExpand(
                                   title: 'Sub cat'.tr,
