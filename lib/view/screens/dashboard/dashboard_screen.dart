@@ -5,6 +5,7 @@ import 'package:flutter_dashboard/contstants/images.dart';
 import 'package:flutter_dashboard/contstants/size_config.dart';
 import 'package:flutter_dashboard/contstants/style_data.dart';
 import 'package:flutter_dashboard/models/response/rp_dash_board_list.dart';
+import 'package:flutter_dashboard/models/response/rp_dash_progress_list.dart';
 import 'package:flutter_dashboard/view/screens/dashboard/widgets/app_bar_acctions.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
@@ -211,7 +212,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                                   : 4,
                               mainAxisSpacing: SizeConfig.isMobile() ? 20 : 20,
                               crossAxisSpacing: SizeConfig.isMobile() ? 20 : 20,
-                              itemCount: rpTopList.length,
+                              itemCount: rpProgressList.length,
                               physics: const ScrollPhysics(),
                               shrinkWrap: true,
                               padding: EdgeInsets.zero,
@@ -219,7 +220,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                                 return InkWell(
                                   onTap: () {},
                                   child: DashboardProgressCard(
-                                    data: rpTopList[index],
+                                    data: rpProgressList[index],
                                     progress: 0.6 + index.toDouble() / 100,
                                   ),
                                 );

@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dashboard/contstants/size_config.dart';
 import 'package:flutter_dashboard/contstants/style_data.dart';
-import 'package:flutter_dashboard/models/response/rp_dash_board_list.dart';
+import 'package:flutter_dashboard/models/response/rp_dash_progress_list.dart';
 import 'package:flutter_svg/svg.dart';
 
 import '../../contstants/colors_data.dart';
 import '../../contstants/images.dart';
 
 class DashboardProgressCard extends StatelessWidget {
-  final RpDashboardTopList data;
+  final RpDashProgressList data;
   final double progress;
   const DashboardProgressCard({
     Key? key,
@@ -43,7 +43,7 @@ class DashboardProgressCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                data.total,
+                data.price,
                 style: Theme.of(context).textTheme.subtitle1?.copyWith(
                       fontSize: 16,
                       color: kWhiteColor,
