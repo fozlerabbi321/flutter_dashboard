@@ -6,12 +6,14 @@ import 'package:flutter_dashboard/contstants/size_config.dart';
 import 'package:flutter_dashboard/contstants/style_data.dart';
 import 'package:flutter_dashboard/models/response/rp_dash_board_list.dart';
 import 'package:flutter_dashboard/models/response/rp_dash_progress_list.dart';
+import 'package:flutter_dashboard/models/response/rp_dash_report_list.dart';
 import 'package:flutter_dashboard/view/screens/dashboard/widgets/app_bar_acctions.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
 
 import '../../widgets/app_bar_logo.dart';
 import '../../widgets/dash_board_progress_grid_card.dart';
+import '../../widgets/dash_board_report_grid_card.dart';
 import '../../widgets/dash_board_top_grid_card.dart';
 import '../../widgets/dashboard_appbar_acount.dart';
 import '../../widgets/side_menu.dart';
@@ -225,7 +227,30 @@ class _DashboardScreenState extends State<DashboardScreen>
                                   ),
                                 );
                               },
-                            )
+                            ),
+                            kHeightBox15,
+                            MasonryGridView.count(
+                              crossAxisCount: SizeConfig.isMobile()
+                                  ? SizeConfig.screenWidth > 600
+                                      ? 2
+                                      : 1 // size < 600 or || size < 768
+                                  : 4,
+                              mainAxisSpacing: SizeConfig.isMobile() ? 20 : 20,
+                              crossAxisSpacing: SizeConfig.isMobile() ? 20 : 20,
+                              itemCount: rpReportList.length,
+                              physics: const ScrollPhysics(),
+                              shrinkWrap: true,
+                              padding: EdgeInsets.zero,
+                              itemBuilder: (BuildContext context, int index) {
+                                return InkWell(
+                                  onTap: () {},
+                                  child: DashboardReportCard(
+                                    data: rpReportList[index],
+                                    progress: 0.6 + index.toDouble() / 100,
+                                  ),
+                                );
+                              },
+                            ),
                           ],
                         ),
                       ),
