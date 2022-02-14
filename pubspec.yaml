@@ -41,6 +41,8 @@ dependencies:
   #Path provider
   path_provider: ^2.0.7
   dotted_line: ^3.1.0
+  #Chart
+  syncfusion_flutter_charts: ^19.4.50
 
   #defult package
   cupertino_icons: ^1.0.3

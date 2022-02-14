@@ -10,7 +10,9 @@ import 'package:flutter_dashboard/models/response/rp_dash_report_list.dart';
 import 'package:flutter_dashboard/view/screens/dashboard/widgets/app_bar_acctions.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 
+import '../../../models/response/scales_data.dart';
 import '../../widgets/app_bar_logo.dart';
 import '../../widgets/dash_board_progress_grid_card.dart';
 import '../../widgets/dash_board_report_grid_card.dart';
@@ -32,6 +34,15 @@ class _DashboardScreenState extends State<DashboardScreen>
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   AnimationController? controller;
   Animation<double>? animation;
+  List<SalesData> data = [
+    SalesData('20K', 0),
+    SalesData('40K', 80),
+    SalesData('60K', 20),
+    SalesData('80K', 90),
+    SalesData('140K', 10),
+    SalesData('160K', 85),
+    SalesData('200K', 0),
+  ];
 
   @override
   void initState() {
@@ -250,6 +261,76 @@ class _DashboardScreenState extends State<DashboardScreen>
                                   ),
                                 );
                               },
+                            ),
+                            kHeightBox15,
+                            SizedBox(
+                              width: SizeConfig.screenWidth,
+                              child: Card(
+                                color: Theme.of(context).cardColor,
+                                margin: EdgeInsets.zero,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(5.0),
+                                ),
+                                elevation: 1.0,
+                                child: Padding(
+                                  padding:
+                                      const EdgeInsets.symmetric(vertical: 12),
+                                  child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10),
+                                          child: Text(
+                                            'Earning of This Month'.tr,
+                                            style: SizeConfig.isDesktop()
+                                                ? Theme.of(context)
+                                                    .textTheme
+                                                    .headline2
+                                                : Theme.of(context)
+                                                    .textTheme
+                                                    .subtitle2,
+                                          ),
+                                        ),
+                                        kHeightBox20,
+                                        Center(
+                                          child: Container(
+                                            width: SizeConfig.screenWidth,
+                                            padding: const EdgeInsets.only(
+                                                right: 10),
+                                            child: SfCartesianChart(
+                                                primaryXAxis: CategoryAxis(),
+                                                // Chart title
+                                                // Enable legend
+                                                legend:
+                                                    Legend(isVisible: false),
+                                                // Enable tooltip
+                                                tooltipBehavior:
+                                                    TooltipBehavior(
+                                                        enable: false),
+                                                series: <
+                                                    ChartSeries<SalesData,
+                                                        String>>[
+                                                  LineSeries<SalesData, String>(
+                                                    dataSource: data,
+                                                    xValueMapper:
+                                                        (SalesData sales, _) =>
+                                                            sales.year,
+                                                    yValueMapper:
+                                                        (SalesData sales, _) =>
+                                                            sales.sales,
+                                                    // Enable data label
+                                                    dataLabelSettings:
+                                                        const DataLabelSettings(
+                                                            isVisible: true),
+                                                  ),
+                                                ]),
+                                          ),
+                                        ),
+                                      ]),
+                                ),
+                              ),
                             ),
                           ],
                         ),
