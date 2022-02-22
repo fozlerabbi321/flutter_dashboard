@@ -10,9 +10,8 @@ import 'package:flutter_dashboard/models/response/rp_dash_report_list.dart';
 import 'package:flutter_dashboard/view/screens/dashboard/widgets/app_bar_acctions.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:get/get.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
 
-import '../../../models/response/scales_data.dart';
+import '../../../models/response/dev_carts.dart';
 import '../../widgets/app_bar_logo.dart';
 import '../../widgets/dash_board_progress_grid_card.dart';
 import '../../widgets/dash_board_report_grid_card.dart';
@@ -20,6 +19,10 @@ import '../../widgets/dash_board_top_grid_card.dart';
 import '../../widgets/dashboard_appbar_acount.dart';
 import '../../widgets/side_menu.dart';
 import '../../widgets/text_image_widget.dart';
+import 'package:charts_flutter/flutter.dart' as charts;
+import 'components/earning_this_month.dart';
+import 'components/expense_ratio.dart';
+import 'components/top_selling_product_by_price.dart';
 import 'widgets/app_bar_services.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -29,43 +32,125 @@ class DashboardScreen extends StatefulWidget {
   _DashboardScreenState createState() => _DashboardScreenState();
 }
 
-class _DashboardScreenState extends State<DashboardScreen>
-    with SingleTickerProviderStateMixin {
+class _DashboardScreenState extends State<DashboardScreen> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
-  AnimationController? controller;
-  Animation<double>? animation;
-  List<SalesData> data = [
-    SalesData('20K', 0),
-    SalesData('40K', 80),
-    SalesData('60K', 20),
-    SalesData('80K', 90),
-    SalesData('140K', 10),
-    SalesData('160K', 85),
-    SalesData('200K', 0),
+
+  List<charts.Series<dynamic, String>> _seriesPieData = [];
+
+  _generateData() {
+    var pieData = [
+      Task(
+        'Work',
+        35.0,
+        const Color(0xFF3366cc),
+      ),
+      Task(
+        'Eat',
+        8.3,
+        const Color(0xFF3366cc),
+      ),
+      Task(
+        'Commute',
+        10.8,
+        const Color(0xFF3366cc),
+      ),
+      Task(
+        'Tv',
+        15.6,
+        const Color(0xFF3366cc),
+      ),
+      Task(
+        'Sleep',
+        19.2,
+        const Color(0xFF3366cc),
+      ),
+      Task(
+        'Other',
+        10.3,
+        const Color(0xFF3366cc),
+      ),
+    ];
+    _seriesPieData.add(
+      charts.Series(
+        data: pieData,
+        domainFn: (dynamic task, _) => task.task,
+        measureFn: (dynamic task, _) => task.taskValue,
+        colorFn: (dynamic task, _) =>
+            charts.ColorUtil.fromDartColor(task.colorVal),
+        id: 'Air Pollution',
+        labelAccessorFn: (dynamic row, _) => '${row.taskValue}',
+      ),
+    );
+  }
+
+  final List<DeveloperSeries> data = [
+    DeveloperSeries(
+      year: "5/12",
+      developers: 300,
+      barColor: charts.ColorUtil.fromDartColor(Colors.green),
+    ),
+    DeveloperSeries(
+      year: "7/12",
+      developers: 600,
+      barColor: charts.ColorUtil.fromDartColor(Colors.green),
+    ),
+    DeveloperSeries(
+      year: "9/12",
+      developers: 700,
+      barColor: charts.ColorUtil.fromDartColor(Colors.green),
+    ),
+    DeveloperSeries(
+      year: "11/12",
+      developers: 800,
+      barColor: charts.ColorUtil.fromDartColor(Colors.green),
+    ),
+    DeveloperSeries(
+      year: "13/12",
+      developers: 900,
+      barColor: charts.ColorUtil.fromDartColor(Colors.green),
+    ),
+    DeveloperSeries(
+      year: "15/12",
+      developers: 1000,
+      barColor: charts.ColorUtil.fromDartColor(Colors.green),
+    ),
+    DeveloperSeries(
+      year: "17/12",
+      developers: 1200,
+      barColor: charts.ColorUtil.fromDartColor(Colors.green),
+    ),
+    DeveloperSeries(
+      year: "19/12",
+      developers: 1300,
+      barColor: charts.ColorUtil.fromDartColor(Colors.green),
+    ),
+    DeveloperSeries(
+      year: "21/12",
+      developers: 1400,
+      barColor: charts.ColorUtil.fromDartColor(Colors.green),
+    ),
+    DeveloperSeries(
+      year: "23/12",
+      developers: 1500,
+      barColor: charts.ColorUtil.fromDartColor(Colors.green),
+    ),
   ];
 
   @override
   void initState() {
     super.initState();
-    controller = AnimationController(
-        duration: const Duration(milliseconds: 2000), vsync: this);
-    animation = Tween(begin: 0.0, end: 1.0).animate(controller!)
-      ..addListener(() {
-        setState(() {
-          // the state that has changed here is the animation object’s value
-        });
-      });
-    controller?.repeat();
+    _seriesPieData = <charts.Series<dynamic, String>>[];
+    _generateData();
   }
 
   @override
   void dispose() {
-    controller?.stop();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    ScrollController scrollController = ScrollController();
     SizeConfig().init(context);
     return GetBuilder<DashboardController>(builder: (dashBoardController) {
       return Scaffold(
@@ -190,6 +275,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                       : const SizedBox(),
                   Expanded(
                     child: SingleChildScrollView(
+                      controller: scrollController,
                       child: Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: SizeConfig.isMobile() ? 10 : 20,
@@ -205,7 +291,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                               mainAxisSpacing: SizeConfig.isMobile() ? 20 : 20,
                               crossAxisSpacing: SizeConfig.isMobile() ? 20 : 20,
                               itemCount: rpTopList.length,
-                              physics: const ScrollPhysics(),
+                              physics: const NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               padding: EdgeInsets.zero,
                               itemBuilder: (BuildContext context, int index) {
@@ -226,7 +312,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                               mainAxisSpacing: SizeConfig.isMobile() ? 20 : 20,
                               crossAxisSpacing: SizeConfig.isMobile() ? 20 : 20,
                               itemCount: rpProgressList.length,
-                              physics: const ScrollPhysics(),
+                              physics: const NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               padding: EdgeInsets.zero,
                               itemBuilder: (BuildContext context, int index) {
@@ -249,7 +335,7 @@ class _DashboardScreenState extends State<DashboardScreen>
                               mainAxisSpacing: SizeConfig.isMobile() ? 20 : 20,
                               crossAxisSpacing: SizeConfig.isMobile() ? 20 : 20,
                               itemCount: rpReportList.length,
-                              physics: const ScrollPhysics(),
+                              physics: const NeverScrollableScrollPhysics(),
                               shrinkWrap: true,
                               padding: EdgeInsets.zero,
                               itemBuilder: (BuildContext context, int index) {
@@ -262,76 +348,56 @@ class _DashboardScreenState extends State<DashboardScreen>
                                 );
                               },
                             ),
-                            kHeightBox15,
-                            SizedBox(
-                              width: SizeConfig.screenWidth,
-                              child: Card(
-                                color: Theme.of(context).cardColor,
-                                margin: EdgeInsets.zero,
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(5.0),
-                                ),
-                                elevation: 1.0,
-                                child: Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 12),
-                                  child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10),
-                                          child: Text(
-                                            'Earning of This Month'.tr,
-                                            style: SizeConfig.isDesktop()
-                                                ? Theme.of(context)
-                                                    .textTheme
-                                                    .headline2
-                                                : Theme.of(context)
-                                                    .textTheme
-                                                    .subtitle2,
-                                          ),
-                                        ),
-                                        kHeightBox20,
-                                        Center(
-                                          child: Container(
-                                            width: SizeConfig.screenWidth,
-                                            padding: const EdgeInsets.only(
-                                                right: 10),
-                                            child: SfCartesianChart(
-                                                primaryXAxis: CategoryAxis(),
-                                                // Chart title
-                                                // Enable legend
-                                                legend:
-                                                    Legend(isVisible: false),
-                                                // Enable tooltip
-                                                tooltipBehavior:
-                                                    TooltipBehavior(
-                                                        enable: false),
-                                                series: <
-                                                    ChartSeries<SalesData,
-                                                        String>>[
-                                                  LineSeries<SalesData, String>(
-                                                    dataSource: data,
-                                                    xValueMapper:
-                                                        (SalesData sales, _) =>
-                                                            sales.year,
-                                                    yValueMapper:
-                                                        (SalesData sales, _) =>
-                                                            sales.sales,
-                                                    // Enable data label
-                                                    dataLabelSettings:
-                                                        const DataLabelSettings(
-                                                            isVisible: true),
-                                                  ),
-                                                ]),
-                                          ),
-                                        ),
-                                      ]),
-                                ),
-                              ),
+                            EarningThisMonth(
+                              data: dashBoardController.thisMonthDataList,
                             ),
+                            EarningThisMonth(
+                              data: dashBoardController.thisMonthDataList,
+                            ),
+                            kHeightBox15,
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: DeveloperChart(
+                                    data: data,
+                                  ),
+                                ),
+                                kWidthBox15,
+                                Expanded(
+                                  child: ExpenseRatio(
+                                    data: data,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            /* SizedBox(
+                              height: 500,
+                              child: charts.PieChart(_seriesPieData,
+                                  animate: true,
+                                  animationDuration: const Duration(seconds: 5),
+                                  behaviors: [
+                                    charts.DatumLegend(
+                                      outsideJustification: charts
+                                          .OutsideJustification.endDrawArea,
+                                      horizontalFirst: false,
+                                      desiredMaxRows: 2,
+                                      cellPadding: const EdgeInsets.only(
+                                          right: 4.0, bottom: 4.0),
+                                      entryTextStyle: charts.TextStyleSpec(
+                                          color: charts.MaterialPalette.purple
+                                              .shadeDefault,
+                                          fontFamily: 'Georgia',
+                                          fontSize: 11),
+                                    )
+                                  ],
+                                  defaultRenderer: charts.ArcRendererConfig(
+                                      arcWidth: 100,
+                                      arcRendererDecorators: [
+                                        charts.ArcLabelDecorator(
+                                            labelPosition:
+                                                charts.ArcLabelPosition.inside)
+                                      ])),
+                            )*/
                           ],
                         ),
                       ),
@@ -461,4 +527,16 @@ class _DashboardScreenState extends State<DashboardScreen>
       );
     });
   }
+}
+
+class Task {
+  String task;
+  double taskValue;
+  Color colorVal;
+
+  Task(
+    this.task,
+    this.taskValue,
+    this.colorVal,
+  );
 }

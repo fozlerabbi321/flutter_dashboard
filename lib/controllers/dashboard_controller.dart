@@ -1,6 +1,7 @@
 import 'package:get/get.dart';
 
 import '../models/response/rp_dash_board_list.dart';
+import '../models/response/scales_data.dart';
 import '../services/repository/home_repo.dart';
 
 class DashboardController extends GetxController {
@@ -16,6 +17,15 @@ class DashboardController extends GetxController {
     'Today\'s Summery'.tr,
     'Return Order'.tr,
     'POS'.tr
+  ];
+  List<SalesData> thisMonthDataList = [
+    SalesData('20K', 0),
+    SalesData('40K', 80),
+    SalesData('60K', 20),
+    SalesData('80K', 90),
+    SalesData('140K', 10),
+    SalesData('160K', 85),
+    SalesData('200K', 0),
   ];
   bool _isAccountPopup = false;
   bool _isMenu = true;

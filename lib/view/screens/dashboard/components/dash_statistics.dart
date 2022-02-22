@@ -6,9 +6,9 @@ import '../../../../contstants/size_config.dart';
 import '../../../../contstants/style_data.dart';
 import '../../../../models/response/scales_data.dart';
 
-class EarningThisMonth extends StatelessWidget {
+class DashStatistics extends StatelessWidget {
   final List<SalesData> data;
-  const EarningThisMonth({
+  const DashStatistics({
     Key? key,
     required this.data,
   }) : super(key: key);
@@ -36,7 +36,7 @@ class EarningThisMonth extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Text(
-                        'Earning of This Month'.tr,
+                        'Statistics'.tr,
                         style: SizeConfig.isDesktop()
                             ? Theme.of(context).textTheme.headline2
                             : Theme.of(context).textTheme.subtitle2,
