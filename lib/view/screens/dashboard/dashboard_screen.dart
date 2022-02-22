@@ -348,28 +348,68 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                 );
                               },
                             ),
-                            EarningThisMonth(
-                              data: dashBoardController.thisMonthDataList,
-                            ),
-                            EarningThisMonth(
-                              data: dashBoardController.thisMonthDataList,
-                            ),
                             kHeightBox15,
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: DeveloperChart(
+                            if (SizeConfig.isDesktop())
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: EarningThisMonth(
+                                      data:
+                                          dashBoardController.thisMonthDataList,
+                                    ),
+                                  ),
+                                  kWidthBox15,
+                                  Expanded(
+                                    child: EarningThisMonth(
+                                      data:
+                                          dashBoardController.thisMonthDataList,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            if (!SizeConfig.isDesktop())
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  EarningThisMonth(
+                                    data: dashBoardController.thisMonthDataList,
+                                  ),
+                                  kHeightBox15,
+                                  EarningThisMonth(
+                                    data: dashBoardController.thisMonthDataList,
+                                  ),
+                                ],
+                              ),
+                            kHeightBox15,
+                            if (SizeConfig.isDesktop())
+                              Row(
+                                children: [
+                                  Expanded(
+                                    child: DeveloperChart(
+                                      data: data,
+                                    ),
+                                  ),
+                                  kWidthBox15,
+                                  Expanded(
+                                    child: ExpenseRatio(
+                                      data: data,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            if (!SizeConfig.isDesktop())
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  DeveloperChart(
                                     data: data,
                                   ),
-                                ),
-                                kWidthBox15,
-                                Expanded(
-                                  child: ExpenseRatio(
+                                  kHeightBox15,
+                                  ExpenseRatio(
                                     data: data,
                                   ),
-                                ),
-                              ],
-                            ),
+                                ],
+                              ),
                             /* SizedBox(
                               height: 500,
                               child: charts.PieChart(_seriesPieData,
