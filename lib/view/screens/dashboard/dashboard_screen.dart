@@ -20,6 +20,7 @@ import '../../widgets/dashboard_appbar_acount.dart';
 import '../../widgets/side_menu.dart';
 import '../../widgets/text_image_widget.dart';
 import 'package:charts_flutter/flutter.dart' as charts;
+import 'components/dashboard_chart.dart';
 import 'components/earning_this_month.dart';
 import 'components/expense_ratio.dart';
 import 'components/top_selling_product_by_price.dart';
@@ -350,35 +351,37 @@ class _DashboardScreenState extends State<DashboardScreen> {
                             ),
                             kHeightBox15,
                             if (SizeConfig.isDesktop())
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: EarningThisMonth(
-                                      data:
-                                          dashBoardController.thisMonthDataList,
+                              SizedBox(
+                                height: 400,
+                                child: Row(
+                                  children: [
+                                    Expanded(
+                                      child: EarningThisMonth(
+                                        data: dashBoardController
+                                            .thisMonthDataList,
+                                      ),
                                     ),
-                                  ),
-                                  kWidthBox15,
-                                  Expanded(
-                                    child: EarningThisMonth(
-                                      data:
-                                          dashBoardController.thisMonthDataList,
+                                    kWidthBox15,
+                                    const Expanded(
+                                      child: BarChartSample1(),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             if (!SizeConfig.isDesktop())
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  EarningThisMonth(
-                                    data: dashBoardController.thisMonthDataList,
-                                  ),
-                                  kHeightBox15,
-                                  EarningThisMonth(
-                                    data: dashBoardController.thisMonthDataList,
-                                  ),
-                                ],
+                              SizedBox(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    EarningThisMonth(
+                                      data:
+                                          dashBoardController.thisMonthDataList,
+                                    ),
+                                    kHeightBox15,
+                                    const SizedBox(
+                                        height: 400, child: BarChartSample1()),
+                                  ],
+                                ),
                               ),
                             kHeightBox15,
                             if (SizeConfig.isDesktop())
@@ -409,6 +412,54 @@ class _DashboardScreenState extends State<DashboardScreen> {
                                     data: data,
                                   ),
                                 ],
+                              ),
+                            kHeightBox15,
+                            if (SizeConfig.isDesktop())
+                              SizedBox(
+                                height: 400,
+                                child: Row(
+                                  children: [
+                                    const Expanded(
+                                      child: LineChartSample2(),
+                                    ),
+                                    kWidthBox15,
+                                    const Expanded(
+                                      child: PieChartSample2(),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            kHeightBox15,
+                            if (SizeConfig.isDesktop())
+                              SizedBox(
+                                height: 400,
+                                child: Row(
+                                  children: [
+                                    const Expanded(
+                                      child: LineChartSample1(),
+                                    ),
+                                    kWidthBox15,
+                                    const Expanded(
+                                      child: BarChartSample2(),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            kHeightBox15,
+                            if (SizeConfig.isDesktop())
+                              SizedBox(
+                                height: 400,
+                                child: Row(
+                                  children: [
+                                    const Expanded(
+                                      child: RadarChartSample1(),
+                                    ),
+                                    kWidthBox15,
+                                    const Expanded(
+                                      child: ScatterChartSample1(),
+                                    ),
+                                  ],
+                                ),
                               ),
                             /* SizedBox(
                               height: 500,
