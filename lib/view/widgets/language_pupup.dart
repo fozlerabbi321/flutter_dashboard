@@ -13,14 +13,14 @@ class LanguagePopup extends StatelessWidget {
         return [
           PopupMenuItem(
             value: 'all',
-            child: Text('all'.tr),
+            child: Text('Bangla'.tr),
             textStyle: Theme.of(context).textTheme.subtitle2?.copyWith(
                   color: kPrimaryColor,
                 ),
           ),
           PopupMenuItem(
             value: 'all',
-            child: Text('Text'.tr),
+            child: Text('English'.tr),
             textStyle: Theme.of(context).textTheme.subtitle2?.copyWith(
                   color: kPrimaryColor,
                 ),
